@@ -1,22 +1,13 @@
 
 def is_safe(v, graph, color, c):
-    """
-    Checks if assigning color 'c' to vertex 'v' is safe.
-    It's safe if no adjacent vertex has the same color.
-    """
+    
     for i in range(len(graph)):
         if graph[v][i] == 1 and color[i] == c:
             return False
     return True
 
 def graph_coloring_util(graph, m, color, v):
-    """
-    A recursive utility function to solve the graph coloring problem.
-    'graph': Adjacency matrix of the graph.
-    'm': Maximum number of colors allowed.
-    'color': List to store the colors assigned to each vertex.
-    'v': Current vertex being considered.
-    """
+   
     num_vertices = len(graph)
 
     if v == num_vertices:
@@ -33,11 +24,7 @@ def graph_coloring_util(graph, m, color, v):
     return False
 
 def solve_graph_coloring(graph, m):
-    """
-    Solves the graph coloring problem.
-    'graph': Adjacency matrix of the graph.
-    'm': Maximum number of colors allowed.
-    """
+    
     num_vertices = len(graph)
     color = [0] * num_vertices 
 
@@ -77,3 +64,4 @@ if __name__ == "__main__":
     max_colors3 = 2
     print(f"Graph 3 with {max_colors3} colors:")
     solve_graph_coloring(graph3, max_colors3)
+
