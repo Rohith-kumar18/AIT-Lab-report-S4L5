@@ -1,23 +1,44 @@
-graph={
-    '5':['3','7'],
-    '3':['2','4'],
-    '7':['8'],
-    '2':[],
-    '4':['8'],
-    '8':[]
-    }
-def bfs(graph, start):
-    visited = []
-    queue = []
-    visited.append(start)
-    queue.append(start)
+from collections import deque
 
-    while queue:
-        node = queue.pop(0)
-        print(node, end=" ")
-        for neighbour in graph[node]:
-            if neighbour not in visited:
-                visited.append(neighbour)
+class Graph:
+    def _init_(self):
+        self.adj_list = {}
+        self.visited = set()
+
+    def add_edge(self, u, v):
+        if u not in self.adj_list:
+            self.adj_list[u] = []
+        if v not in self.adj_list:
+            self.adj_list[v] = []
+        self.adj_list[u].append(v)
+        self.adj_list[v].append(u)
+
+    def bfs_recursive(self, queue):
+        if not queue:
+            return
+        
+        current = queue.popleft()
+        print(current, end=" ")
+
+        for neighbour in self.adj_list[current]:
+            if neighbour not in self.visited:
+                self.visited.add(neighbour)
                 queue.append(neighbour)
 
-bfs(graph, '5')
+        self.bfs_recursive(queue)
+
+    def bfs(self, start):
+        self.visited = set()
+        queue = deque()
+
+        self.visited.add(start)
+        queue.append(start)
+
+        print("BFS Traversal:")
+        self.bfs_recursive(queue)
+g = Graph()
+g.add_edge('A', 'B')
+g.add_edge('A', 'C')
+g.add_edge('B', 'D')
+g.add_edge('C', 'E')
+g.bfs('A')
