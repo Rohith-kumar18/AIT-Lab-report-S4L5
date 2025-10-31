@@ -1,25 +1,36 @@
-graph = {'A': {'B':2, 'C':3},
-     'B': {'C':2, 'D':5},
-     'C': {'D':4, 'G':2},
-     'D': {'C':6, 'E':4},
-     'E': {'F':1},
-     'F': [],
-     'G': []}
 
+graph = {
+    'A': {'B': 2},
+    'B': {'C': 3},
+    'C': {'D': 3},
+    'D': {'A': 4}
+}
 
-def find_all_paths(graph, start, end, path=[]):
-    path = path + [start]
-    if start == end:
-        return [path]
-    if start not in graph:
-        return []
-    paths = []
-    for node in graph[start]:
-        if node not in path:
-            paths += find_all_paths(graph, node, end, path)
+start = 'A'
+end = 'D'
 
-    return paths
+path = ['A', 'B', 'C', 'D']
+total_cost = 0
 
-print("Path : ",find_all_paths(graph, 'A', 'F'))
+for i in range(len(path) - 1):
+    current_node = path[i]
+    next_node = path[i + 1]
+    cost = graph[current_node][next_node]
+    print(f"Cost from {current_node} to {next_node}: {cost}")
+    total_cost += cost
 
-cost= cost + (str(graph['A'].get('B')+(graph['A'].get('C'))))
+print("Total Cost:", total_cost)
+start = 'A'
+end = 'A'
+
+path = ['A', 'B', 'C', 'D', 'A']
+total_cost = 0
+
+for i in range(len(path) - 1):
+    current_node = path[i]
+    next_node = path[i + 1]
+    cost = graph[current_node][next_node]
+    print(f"Cost from {current_node} to {next_node}: {cost}")
+    total_cost += cost
+
+print("Total Cost:", total_cost)
